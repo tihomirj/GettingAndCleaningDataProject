@@ -51,7 +51,8 @@ colnames(subjectTrain) <- "subjectId"
 colnames(XTrain) <- features[,2]
 colnames(yTrain) <- "activityId"
 
-# Create the final training set by merging training labels (yTrain), subject who performed activity (subjectTrain) and  training set (XTrain)
+# Create the final training set by merging training labels (yTrain), 
+# subject who performed activity (subjectTrain) and  training set (XTrain)
 trainingData = cbind(yTrain,subjectTrain,XTrain)
 
 # Read test data
@@ -66,7 +67,8 @@ colnames(subjectTest) <- "subjectId"
 colnames(XTest) <- features[,2]
 colnames(yTest) <- "activityId"
 
-# Create the final test set by merging the test set from (XTest), test labels from (yTest) and the subject from (subjectTest) 
+# Create the final test set by merging the test set from (XTest), test labels from (yTest) 
+# and the subject from (subjectTest) 
 testData <- cbind(yTest,subjectTest,XTest)
 
 # Merge training and test data to create one data set
@@ -94,6 +96,7 @@ names(Data)<-gsub(pattern = "Mag", replacement = "Magnitude", names(Data))   # "
 names(Data)<-gsub(pattern= "BodyBody", replacement = "Body", names(Data))    # "BodyBody" replaced by "Body"
 
 # Creates a second, independent tidy data set with the average of each variable for each activity and each subject
+# The dataset is created in directory "./data/UCI HAR Dataset". The file is "tidydata.txt"
 
 Data2 <- aggregate(formula = . ~subjectId + activityId, data = Data, FUN = mean)
 Data2 <- Data2[order(Data2$subjectId, Data2$activityId), ] 
