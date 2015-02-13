@@ -61,12 +61,12 @@ The vector `Data$activityId` is factorized using the labels `activity$activityTy
 
 ### Section 4. Appropriately labels the data set with descriptive variable names. 
 `gsub` function for pattern replacement is used to clean up the data labels.
-- "^t" is replaced by "time" 
-- "^f" is replaced by "frecuency" 
+- "^t" is replaced by "Time" 
+- "^f" is replaced by "Frecuency" 
 - "Acc" is replaced by "Accelerometer" 
 - "Gyro" is replaced by "Gyroscope" 
 - "Mag" is replaced by "Magnitude"
 - "BodyBody" is replaced by "Body"
 
 ### Section 5. From the data set in section 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-Using `aggregate` a new dataset `Data2` with the average of each variable for each activity and each subject is created. The dataset is created in directory `./data/UCI HAR Dataset`. The file is `tidydata.txt`.
+Using `aggregate` a new dataset `Data2` with the average of each variable for each activity and each subject is created. The dimensions of `Data2` are 180 rows (30 subjects x 6 activities) x 68 columns (variables). The dataset is created in directory `./data/UCI HAR Dataset`. The file is `tidydata.txt`.
