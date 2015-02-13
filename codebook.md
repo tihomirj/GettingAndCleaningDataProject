@@ -3,7 +3,15 @@
 Tihomir Jilevski
 
 ## Description
-Additional information about the variables, data and transformations used in the course project for the Johns Hopkins University Getting and Cleaning Data course.
+
+The script `run_analysis.R`performs the 5 steps described in the course project's definition.
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+3. Uses descriptive activity names to name the activities in the data set
+4. Appropriately labels the data set with descriptive variable names. 
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+The sript downloads the Samsung data (which are zipped) in a subdirectory `./data`. The data is unzipped in `./data/UCI HAR Dataset` .
+The final independent dataset (point 5. above) is created in  `./data/UCI HAR Dataset`. The file is `tidydata.txt`
 
 ## Source Data
 A full description of the data used in this project can be found at [The UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
@@ -23,28 +31,41 @@ For each record in the dataset it is provided:
 * Its activity label. 
 * An identifier of the subject who carried out the experiment.
 
-### Section 1. Merge the training and the test sets to create one data set.
+### Section 1. Download data. Merge the training and the test sets to create one data set.
+The script 'run_anaysis.R' downloads the Samsung data (which are zipped) in a subdirectory **./data**.
+The data is unzipped in **./data/UCI HAR Dataset** 
+ 
 After setting the source directory for the files, read into tables the data located in
-- features.txt
-- activity_labels.txt
-- subject_train.txt
-- X_train.txt
-- y_train.txt
-- subject_test.txt
-- X_test.txt
-- y_test.txt
+- import all features from file **features.txt** and saved into data frame **features**
+- import activity labels from file **activity_labels.txt** and saved into data frame **activity**
+- import the identification of subject who performed the train activity from file **subject_train.txt** and saved into data frame **subjectTrain**
+- import training set from file **X_train.txt** and save into data frame **XTrain**
+- import training labels from file **y_train.txt** and save into data frame **yTrain**
+- import the identification of subject who performed the test activity from file **subject_test.txt** and saved into data frame **subjectTest**
+- import the test set from file **X_test.txt** and save into data frame **XTest**
+- import the test labels from file **y_test.txt** and save into data frame **yTest**
 
-Assign column names and merge to create one data set.
+Column names which are taken from `features` are assigned to `XTest`, `XTrain`. 
+The name `activityId` is assigned to `yTest` and `yTrain`.
+The name `subjectId` is assigned to `subjectTest` and `subjectTrain`.
+Using `cbind` the data frames `XTrain`, `yTrain` and `subjectTrain` are combined into data frame`trainingData`.
+Similarly, using `cbind` the data frames `XTest`, `yTest` and `subjectTest` are combined into data frame`testData`.
+Finally,  using `rbind` the data frames `trainingData` and `testData` are merged into `Data` .
 
-### Section 2. Extract only the measurements on the mean and standard deviation for each measurement. 
-Create a logcal vector that contains TRUE values for the ID, mean and stdev columns and FALSE values for the others.
-Subset this data to keep only the necessary columns.
+### Section 2. Extracts only the measurements on the mean and standard deviation for each measurement.
+Using `grep` and the vector `features$V2` a subset of feature names that measure mean and standard deviation is created. To these names are added `subjectId` and `activityId` and the final data frame `Data` is created.
 
-### Section 3. Use descriptive activity names to name the activities in the data set
-Merge data subset with the activityType table to cinlude the descriptive activity names
+### Section 3. Uses descriptive activity names to name the activities in the data set
+The vector `Data$activityId` is factorized using the labels `activity$activityType` from data frame `activity`. Thus the activities now are coded with meaningful names.
 
-### Section 4. Appropriately label the data set with descriptive activity names.
-Use gsub function for pattern replacement to clean up the data labels.
+### Section 4. Appropriately labels the data set with descriptive variable names. 
+`gsub` function for pattern replacement is used to clean up the data labels.
+- "^t" is replaced by "time" 
+- "^f" is replaced by "frecuency" 
+- "Acc" is replaced by "Accelerometer" 
+- "Gyro" is replaced by "Gyroscope" 
+- "Mag" is replaced by "Magnitude"
+- "BodyBody" is replaced by "Body"
 
-### Section 5. Create a second, independent tidy data set with the average of each variable for each activity and each subject. 
-Per the project instructions, we need to produce only a data set with the average of each veriable for each activity and subject
+### Section 5. From the data set in section 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+Using `aggregate` a new dataset `Data2` with the average of each variable for each activity and each subject is created. The dataset is created in directory "./data/UCI HAR Dataset". The file is "tidydata.txt"
