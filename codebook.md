@@ -68,4 +68,4 @@ The vector `Data$activityId` is factorized using the labels `activity$activityTy
 - "BodyBody" is replaced by "Body"
 
 ### Section 5. From the data set in section 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-Using `aggregate` a new dataset `Data2` with the average of each variable for each activity and each subject is created. The dataset is created in directory "./data/UCI HAR Dataset". The file is "tidydata.txt"
+Using `aggregate` a new dataset `Data2` with the average of each variable for each activity and each subject is created. The dataset is created in directory `./data/UCI HAR Dataset`. The file is `tidydata.txt`.
