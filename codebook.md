@@ -33,20 +33,20 @@ For each record in the dataset it is provided:
 * An identifier of the subject who carried out the experiment.
 
 ### Section 1. Download data. Merge the training and the test sets to create one data set.
-The script 'run_anaysis.R' downloads the Samsung data (which are zipped) in a subdirectory **./data**.
-The data is unzipped in **./data/UCI HAR Dataset** 
+The script `run_anaysis.R` downloads the Samsung data (which are zipped) in a subdirectory `./data`.
+The data is unzipped in `./data/UCI HAR Dataset`.
  
-After setting the source directory for the files, read into tables the data located in
-- import all features from file **features.txt** and saved into data frame **features**
-- import activity labels from file **activity_labels.txt** and saved into data frame **activity**
-- import the identification of subject who performed the train activity from file **subject_train.txt** and saved into data frame **subjectTrain**
-- import training set from file **X_train.txt** and save into data frame **XTrain**
-- import training labels from file **y_train.txt** and save into data frame **yTrain**
-- import the identification of subject who performed the test activity from file **subject_test.txt** and saved into data frame **subjectTest**
-- import the test set from file **X_test.txt** and save into data frame **XTest**
-- import the test labels from file **y_test.txt** and save into data frame **yTest**
+After setting the source directory for the files, read into tables the data located in:
+- import all features from file `features.txt` and saved into data frame `features`
+- import activity labels from file `activity_labels.txt` and saved into data frame `activity`
+- import the identification of subject who performed the train activity from file `subject_train.txt` and saved into data frame `subjectTrain`
+- import training set from file `X_train.txt` and save into data frame `XTrain`
+- import training labels from file `y_train.txt` and save into data frame `yTrain`
+- import the identification of subject who performed the test activity from file `subject_test.txt` and saved into data frame `subjectTest`
+- import the test set from file `X_test.txt` and save into data frame `XTest`
+- import the test labels from file `y_test.txt` and save into data frame `yTest`
 
-Column names which are taken from `features` are assigned to `XTest`, `XTrain`. 
+Column names which are taken from `features$V2` are assigned to `XTest`, `XTrain`. 
 The name `activityId` is assigned to `yTest` and `yTrain`.
 The name `subjectId` is assigned to `subjectTest` and `subjectTrain`.
 Using `cbind` the data frames `XTrain`, `yTrain` and `subjectTrain` are combined into data frame`trainingData`.
@@ -54,10 +54,10 @@ Similarly, using `cbind` the data frames `XTest`, `yTest` and `subjectTest` are 
 Finally,  using `rbind` the data frames `trainingData` and `testData` are merged into `Data` .
 
 ### Section 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-Using `grep` and the vector `features$V2` a subset of feature names that measure mean and standard deviation is created. To these names are added `subjectId` and `activityId` and the final data frame `Data` is created.
+Using `grep` and the vector `features$V2` a subset of feature names that measure mean and standard deviation is created. To these names are added `subjectId` and `activityId` and the final data frame `Data` is subsetted.
 
 ### Section 3. Uses descriptive activity names to name the activities in the data set
-The vector `Data$activityId` is factorized using the labels `activity$activityType` from data frame `activity`. Thus the activities now are coded with meaningful names.
+The vector `Data$activityId` is factorized using the labels `activity$activityType` from data frame `activity`. Thus, the activities now are coded with meaningful names.
 
 ### Section 4. Appropriately labels the data set with descriptive variable names. 
 `gsub` function for pattern replacement is used to clean up the data labels.
