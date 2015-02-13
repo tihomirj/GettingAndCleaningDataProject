@@ -38,7 +38,10 @@ features <- read.table('./features.txt',header=FALSE)
 activity <-  read.table('./activity_labels.txt',header=FALSE) 
 
 # Read train data
-subjectTrain <- read.table('./train/subject_train.txt',header=FALSE) #imports the identification of subject who performed the train activity from file subject_train.txt
+
+#imports the identification of subject who performed the train activity from file subject_train.txt
+subjectTrain <- read.table('./train/subject_train.txt',header=FALSE) 
+
 XTrain <-  read.table('./train/X_train.txt',header=FALSE) #imports training set from file X_train.txt
 yTrain <-  read.table('./train/y_train.txt',header=FALSE) #imports training labels from file y_train.txt
 
@@ -52,7 +55,9 @@ colnames(yTrain) <- "activityId"
 trainingData = cbind(yTrain,subjectTrain,XTrain)
 
 # Read test data
-subjectTest <- read.table('./test/subject_test.txt',header=FALSE) #imports the identification of subject who performed the test activity  from file subject_test.txt
+
+#imports the identification of subject who performed the test activity  from file subject_test.txt
+subjectTest <- read.table('./test/subject_test.txt',header=FALSE) 
 XTest <- read.table('./test/X_test.txt',header=FALSE) #imports the test set from file X_test.txt
 yTest <- read.table('./test/y_test.txt',header=FALSE) #imports the test labels from file y_test.txt
 
@@ -69,8 +74,11 @@ Data <- rbind(trainingData,testData)
 
 #Extracts only the measurements on the mean and standard deviation for each measurement
 
-subdata_features <-features$V2[grep("mean\\(\\)|std\\(\\)", features$V2)]           # subset of feature names that measure mean and standard deviation
-selected_features <- c("subjectId", "activityId",as.character(subdata_features))    # select the columns that will appear in the final dataset
+# subset of feature names that measure mean and standard deviation
+subdata_features <-features$V2[grep("mean\\(\\)|std\\(\\)", features$V2)]           
+
+# select the columns that will appear in the final dataset
+selected_features <- c("subjectId", "activityId",as.character(subdata_features))    
 Data<-subset(Data, select = selected_features)
 
 # Use descriptive activity names to name the activities in the data set
@@ -78,12 +86,12 @@ Data$activityId <- factor(Data$activityId, labels = activity$activityType)
 
 # Appropriately labels the data set with descriptive variable names
 
-names(Data)<-gsub(pattern = "^t", replacement = "time", names(Data))            # "^t" becomes "time" 
-names(Data)<-gsub(pattern = "^f", replacement = "frequency", names(Data))       # "^f" becomes "frecuency" 
-names(Data)<-gsub(pattern = "Acc",replacement = "Accelerometer", names(Data))  # "Acc" becomes "Accelerometer" 
-names(Data)<-gsub(pattern = "Gyro",replacement =  "Gyroscope", names(Data))     # "Gyro" becomes "Gyroscope" 
-names(Data)<-gsub(pattern = "Mag", replacement = "Magnitude", names(Data))      # "Mag" becomes "Magnitude"
-names(Data)<-gsub(pattern= "BodyBody", replacement = "Body", names(Data))      # "BodyBody" becomes "Body"
+names(Data)<-gsub(pattern = "^t", replacement = "time", names(Data))         # "^t" replaced by "time" 
+names(Data)<-gsub(pattern = "^f", replacement = "frequency", names(Data))    # "^f" replaced by "frecuency" 
+names(Data)<-gsub(pattern = "Acc",replacement = "Accelerometer", names(Data))# "Acc" replaced by "Accelerometer" 
+names(Data)<-gsub(pattern = "Gyro",replacement =  "Gyroscope", names(Data))  # "Gyro" replaced by "Gyroscope" 
+names(Data)<-gsub(pattern = "Mag", replacement = "Magnitude", names(Data))   # "Mag" replaced by "Magnitude"
+names(Data)<-gsub(pattern= "BodyBody", replacement = "Body", names(Data))    # "BodyBody" replaced by "Body"
 
 # Creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
