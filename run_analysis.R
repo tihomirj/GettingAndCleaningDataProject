@@ -89,7 +89,7 @@ Data$activityId <- factor(Data$activityId, labels = activity$activityType)
 # Appropriately labels the data set with descriptive variable names
 
 names(Data)<-gsub(pattern = "^t", replacement = "Time", names(Data))         # "^t" replaced by "Time" 
-names(Data)<-gsub(pattern = "^f", replacement = "Frequency", names(Data))    # "^f" replaced by "Frecuency" 
+names(Data)<-gsub(pattern = "^f", replacement = "Frequency", names(Data))    # "^f" replaced by "Frequency" 
 names(Data)<-gsub(pattern = "Acc",replacement = "Accelerometer", names(Data))# "Acc" replaced by "Accelerometer" 
 names(Data)<-gsub(pattern = "Gyro",replacement =  "Gyroscope", names(Data))  # "Gyro" replaced by "Gyroscope" 
 names(Data)<-gsub(pattern = "Mag", replacement = "Magnitude", names(Data))   # "Mag" replaced by "Magnitude"

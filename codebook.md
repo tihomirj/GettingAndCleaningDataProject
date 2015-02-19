@@ -62,7 +62,7 @@ The vector `Data$activityId` is factorized using the labels `activity$activityTy
 ### Section 4. Appropriately labels the data set with descriptive variable names. 
 `gsub` function for pattern replacement is used to clean up the data labels.
 - "^t" is replaced by "Time" 
-- "^f" is replaced by "Frecuency" 
+- "^f" is replaced by "Frequency" 
 - "Acc" is replaced by "Accelerometer" 
 - "Gyro" is replaced by "Gyroscope" 
 - "Mag" is replaced by "Magnitude"

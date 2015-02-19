@@ -9,8 +9,10 @@ The script `run_analysis.R`performs the 5 steps described in the course project'
 - Appropriately labels the data set with descriptive variable names.
 - From the above mentioned data set, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-The sript downloads the Samsung data (which are zipped) in a subdirectory `./data`. The data is unzipped in `./data/UCI HAR Dataset` .
-The final independent dataset is created in  `./data/UCI HAR Dataset`. The file is `tidydata.txt`
+The sript downloads the Samsung data (which is zipped) in a subdirectory `./data`. 
+If `./data` does not exist, the script creates it. The data is unzipped in `./data/UCI HAR Dataset` .
+The final independent dataset with the average of each variable for each activity and each subject is created in `./data/UCI HAR Dataset`. 
+The file is `tidydata.txt`
 
 The script is written in R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet".
 It was run and tested on RStudio Version 0.98.1091 – © 2009-2014 RStudio, Inc.
